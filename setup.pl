@@ -81,7 +81,7 @@ print_disciplines_by_semester :-
 
 /*Print discipline by code*/
 print_discipline_by_code :-
-    write_ln('Digite o código da disciplina que está procurando em maiúsculo, seguido de um ponto final'), nl,
+    write_ln('Digite o código da disciplina que está procurando, seguido de um ponto final'), nl,
     read(Input),
     string_upper(Input, Code),
     discipline(Code, Name, Hours, Status, _),
@@ -97,8 +97,21 @@ print_classes_by_code :-
     interface.
 
 
+
 register_discipline :-
-    write('Em desenvolviemnto'),
+    write_ln('Digite o código da disciplina que está procurando, seguido de um ponto final'), nl,
+    read(Input),
+    string_upper(Input, Code),
+    discipline(Code, Name, Hours, Status, Semester),
+    open('maked_disciplines.txt', write, Out),
+    write(Out, '\''), 
+    write(Out, Code), write(Out, ';'), 
+    write(Out, Name), write(Out, ';'), 
+    write(Out, Hours), write(Out, ';'), 
+    write(Out, Status), write(Out, ';'), 
+    write(Out, Semester), write(Out, '\''),
+    write(Out, '\n'),
+    close(Out),
     interface.
 
 
