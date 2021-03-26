@@ -97,6 +97,58 @@ print_classes_by_code :-
     interface.
 
 
+register_discipline :-
+    write('Em desenvolviemnto'),
+    interface.
+
+
+print_disciplines_not_cursed :-
+    write('Em desenvolviemnto'),
+    interface.
+
+
+make_grade :-
+    write('Em desenvolviemnto'),
+    interface.
+
+
+/*Exit program*/
+exit():-
+    write_ln('Obrigado pela presença!'),
+    halt(0).
+
+
+/*Switch case implementation*/
+switch(_, []) :- write_ln('Essa opção não existe.').
+switch(X, [Val:Goal|Cases]) :-
+    ( X=Val ->
+        call(Goal)
+    ;
+        switch(X, Cases)
+    ).  
+
+
+/*Options menu*/
+interface:-
+    nl,
+    write_ln('Olá, o que você deseja? Digite a opção, seguida por um ponto final'), nl,
+    write_ln('[1] - Listar fluxo por por número do semestre'),
+    write_ln('[2] - Buscar disciplina por código'),
+    write_ln('[3] - Buscar turmas da disciplina'),
+    write_ln('[4] - Cadastrar matéria'),
+    write_ln('[5] - Matérias não feitas'),
+    write_ln('[6] - Gerar Grade'),
+    write_ln('[7] - Encerrar'),
+    read(Option),
+    switch(Option, [
+            1 : print_disciplines_by_semester,
+            2 : print_discipline_by_code,
+            3 : print_classes_by_code,
+            4 : register_discipline,
+            5 : print_disciplines_not_cursed,
+            6 : make_grade,
+            7 : exit()
+        ]).
 
 /*Main function to start the program*/
 main:-
