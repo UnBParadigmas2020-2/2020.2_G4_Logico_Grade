@@ -48,7 +48,8 @@ print_join_list([Element|List]) :-
 
 
 /*Print list of lists. One list by line, joined by space */
-print_list_of_lists([]).
+print_list_of_lists([]) :-
+    write('--- Fim dos elementos ---'), nl.
 
 print_list_of_lists([Element|List]) :-
     print_join_list(Element),nl,
@@ -60,6 +61,9 @@ get_disciplines_by_semester(Semester) :-
     findall([Code, Name, Hours, Status], 
             discipline(Code, Name, Hours, Status, Semester), List), print_list_of_lists(List).
 
+get_classes_by_code(Discipline) :-
+    findall([Teacher], 
+            class(Discipline, _, Teacher, _, _), List), print_list_of_lists(List).
 
 /*Print all disciplines of a given semester*/
 print_disciplines_by_semester :-
@@ -71,6 +75,22 @@ print_disciplines_by_semester :-
     get_disciplines_by_semester(Semester),
     interface.
 
+/*Print discipline by code*/
+print_discipline_by_code :-
+    write_ln('Digite o código da disciplina que está procurando em maiúsculo, seguido de um ponto final'), nl,
+    read(Input),
+    string_upper(Input, Code),
+    discipline(Code, Name, Hours, Status, _),
+    write(Code), write(' - '), write(Name), write(' '), write(Hours), write(' '), write(Status), nl,
+    interface.
+
+print_classes_by_code :-
+    write_ln('Digite o código da disciplina que está procurando em minusculo, seguido de um ponto final'), nl,
+    read(Input),
+    string_upper(Input, Code),
+    write('Essas são as as turmas da disciplina '), write(Code), write_ln(": "),
+    get_classes_by_code(Code),
+    interface.
 
 /*Exit program*/
 exit():-
@@ -91,11 +111,15 @@ interface:-
     nl,
     write_ln('Olá, o que você deseja ? Digite a opção, seguida por um ponto final'), nl,
     write_ln('[1] - Listar disciplinas de um semestre'),
-    write_ln('[2] - Encerrar '),
+    write_ln('[2] - Buscar disciplina por código'),
+    write_ln('[3] - Buscar turmas da disciplina'),
+    write_ln('[4] - Encerrar'),
     read(Option),
     switch(Option, [
             1 : print_disciplines_by_semester,
-            2 : exit()
+            2 : print_discipline_by_code,
+            3 : print_classes_by_code,
+            4 : exit()
         ]).
 
 /*Main function to start the program*/
