@@ -1,7 +1,9 @@
 :- dynamic(discipline/5).
+:- dynamic(class/5).
 
-setup:-
-    open('disciplinas.txt', read, Str),
+/*Setting up Discipline Facts*/
+setup_discipline :-
+    open('disciplines.txt', read, Str),
     read_disciplines(Str, _),
     close(Str).
 
@@ -17,6 +19,25 @@ read_disciplines(Stream, [X|L]) :-
     split_string(X, ';', ';', Text),
     write_discipline(Text),
     read_disciplines(Stream, L).
+
+/*Setting up Class Facts*/
+setup_class:-
+    open('classes.txt', read, Str),
+    read_class(Str, _),
+    close(Str).
+
+write_class([Discipline, Code, Teacher, TotalHours, Hours]) :-
+    assertz(class(Discipline, Code, Teacher, TotalHours, Hours)).
+
+read_class(Stream, []) :-
+    at_end_of_stream(Stream).
+
+read_class(Stream, [X|L]) :-
+    \+ at_end_of_stream(Stream),
+    read(Stream, X),
+    split_string(X, ';', ';', Text),
+    write_class(Text),
+    read_class(Stream, L).
 
 /*Print list as one, separating by space*/
 print_join_list([]).
@@ -79,5 +100,6 @@ interface:-
 
 /*Main function to start the program*/
 main:-
-    setup;
+    setup_discipline;
+    setup_class;
     interface.
