@@ -47,10 +47,37 @@ print_disciplines_by_semester :-
     /*Converting integer to string*/
     number_string(Semester_Integer, Semester),
     write('Essas são as disciplinas do semestre '), write(Semester), write_ln(": "),
-    get_disciplines_by_semester(Semester).
+    get_disciplines_by_semester(Semester),
+    interface.
 
 
 /*Exit program*/
 exit():-
     write_ln('Até logo !'),
     halt(0).
+
+/*Switch case implementation*/
+switch(_, []) :- write_ln('Essa opção não existe.').
+switch(X, [Val:Goal|Cases]) :-
+    ( X=Val ->
+        call(Goal)
+    ;
+        switch(X, Cases)
+    ).  
+
+/*Options menu*/
+interface:-
+    nl,
+    write_ln('Olá, o que você deseja ? Digite a opção, seguida por um ponto final'), nl,
+    write_ln('[1] - Listar disciplinas de um semestre'),
+    write_ln('[2] - Encerrar '),
+    read(Option),
+    switch(Option, [
+            1 : print_disciplines_by_semester,
+            2 : exit()
+        ]).
+
+/*Main function to start the program*/
+main:-
+    setup;
+    interface.
