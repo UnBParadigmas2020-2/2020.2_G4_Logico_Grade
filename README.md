@@ -26,12 +26,20 @@ Adicione 2 ou mais screenshots do projeto em termos de interface e/ou funcioname
 
 **Linguagens**: Prolog<br>
 **Tecnologias**: SWI-Prolog<br>
-Descreva os pré-requisitos para rodar o seu projeto e os comandos necessários.
-Insira um manual ou um script para auxiliar ainda mais.
+
+### Via docker
+Se você tiver [docker](https://docs.docker.com/get-docker/) e [docker-compose](https://docs.docker.com/compose/install/) instalados, basta rodar o comando a seguir na raiz do projeto e pronto:
+
+```docker-compose run logico-grade```
+
+### Manualmente
+Para instalar manualmente, você precisará do [swipl](https://www.swi-prolog.org/download/stable). Com ele instalado, basta executar  
+```swipl main.pl``` na raiz do projeto.
+
 
 ## Uso
-
-Você terá um menu de opções:
+O primeiro passo é executar ```main.``` , uma vez ja dentro do swipl (seja via docker ou manualmente). Isso te dará um menu de opções.
+Menu de opções:
 
 1. listar matrerias
 2. pesquisar materia
