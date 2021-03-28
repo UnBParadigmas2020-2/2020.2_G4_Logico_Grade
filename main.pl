@@ -1,6 +1,7 @@
 :- ['src/utils'].
 :- ['src/classes'].
 :- ['src/disciplines'].
+:- ['src/attending_class'].
 
 /*Print all disciplines of a given semester*/
 print_disciplines_by_semester :-
@@ -31,6 +32,10 @@ print_classes_by_code :-
     write('Turmas da disciplina '), write(Code), write_ln(": "),
     get_classes_by_code(Code),
     interface.
+
+print_attending_classes :-
+    setup_attending_classes;
+    attending_classes.
 
 
 /*Register a completed discipline*/
