@@ -19,13 +19,11 @@ register_attending_classes :-
     attending_classes.
 
 
-/*Setting up Discipline Facts*/
 setup_attending_classes :-
     open('data/attending_classes.txt', read, Str),
     read_attending_classes(Str, _),
     close(Str).
 
-/*Read disciplines from file*/
 read_attending_classes(Stream, []) :-
     at_end_of_stream(Stream),
     write('\n'),
@@ -38,13 +36,5 @@ read_attending_classes(Stream, [X|L]) :-
     get_attending_disciplines(Text),
     read_attending_classes(Stream, L).
 
-/*Get the list of disciplines for a given semester*/
 get_attending_disciplines(Text) :-
-    print_join_attending_classes(Text), nl.
-
-/*Print list as one, separating by space*/
-print_join_attending_classes([]).
-
-print_join_attending_classes([Element|List]) :-
-    write(Element), write(" "),
-    print_join_attending_classes(List).
+    print_join_list(Text), nl.
