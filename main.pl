@@ -56,14 +56,23 @@ register_completed_discipline :-
     interface.
 
 
-print_disciplines_not_cursed :-
+print_not_attended_disciplines :-
     write('Em desenvolviemnto'),
     interface.
 
 
-make_grade :-
-    write('Em desenvolviemnto'),
-    interface.
+attending_classes :-
+    nl,
+    write_ln('Você está montando sua grade, escolha uma das opções abaixo seguido de um ponto final'), nl,
+    write_ln('[1] - Adicionar disciplina'),
+    write_ln('[2] - Ver minha grade'),
+    write_ln('[3] - Voltar ao menu principal'),
+    read(Option),
+    switch(Option, [
+            1 : register_attending_classes,
+            2 : print_attending_classes,
+            3 : interface
+        ]).
 
 
 /*Options menu*/
@@ -83,8 +92,8 @@ interface:-
             2 : print_discipline_by_code,
             3 : print_classes_by_code,
             4 : register_completed_discipline,
-            5 : print_disciplines_not_cursed,
-            6 : make_grade,
+            5 : print_not_attended_disciplines,
+            6 : attending_classes,
             7 : exit()
         ]).
 
