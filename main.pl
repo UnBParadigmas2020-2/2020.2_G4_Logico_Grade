@@ -2,6 +2,7 @@
 :- ['src/classes'].
 :- ['src/disciplines'].
 :- ['src/attending_class'].
+:- ['src/completed_discipline'].
 
 /*Print all disciplines of a given semester*/
 print_disciplines_by_semester :-
@@ -11,6 +12,11 @@ print_disciplines_by_semester :-
     number_string(Semester_Integer, Semester),
     write('Disciplinas do semestre '), write(Semester), write_ln(": "),
     get_disciplines_by_semester(Semester),
+    interface.
+
+/*Print all completed disciplines of a given semester*/
+print_all_completed_disciplines :-
+    get_completed_disciplines,
     interface.
 
 
@@ -33,6 +39,7 @@ print_classes_by_code :-
     get_classes_by_code(Code),
     interface.
 
+
 print_attending_classes :-
     setup_attending_classes;
     attending_classes.
@@ -51,13 +58,23 @@ register_completed_discipline :-
     write(Out, Hours), write(Out, ';'), 
     write(Out, Status), write(Out, ';'), 
     write(Out, Semester), write(Out, '\''),
-    write(Out, '\n'),
+    write(Out, '.'), write(Out, '\n'),
     close(Out),
+    write_completed_discipline([Code, Name, Hours, Status, Semester]),
     interface.
 
 
 print_not_attended_disciplines :-
-    write('Em desenvolviemnto'),
+    findall([Code, Name, Hours, Status, Semester], 
+            discipline(Code, Name, Hours, Status, Semester), Disciplines),
+    
+    findall([Code, Name, Hours, Status, Semester], 
+            completed_discipline(Code, Name, Hours, Status, Semester), Completed),
+    
+    subtract(Disciplines, Completed, Remaining),
+    
+    print_list_of_lists(Remaining),
+    
     interface.
 
 
@@ -82,23 +99,26 @@ interface:-
     write_ln('[1] - Listar fluxo por número do semestre'),
     write_ln('[2] - Buscar disciplina por codigo'),
     write_ln('[3] - Buscar turmas da disciplina'),
-    write_ln('[4] - Cadastrar matéria já feita'),
-    write_ln('[5] - Ver matérias não feitas'),
-    write_ln('[6] - Gerar Grade'),
-    write_ln('[7] - Encerrar'),
+    write_ln('[4] - Cadastrar matéria já cursada'),
+    write_ln('[5] - Ver matérias cursadas'),
+    write_ln('[6] - Ver matérias não cursadas'),
+    write_ln('[7] - Gerar Grade'),
+    write_ln('[8] - Encerrar'),
     read(Option),
     switch(Option, [
             1 : print_disciplines_by_semester,
             2 : print_discipline_by_code,
             3 : print_classes_by_code,
             4 : register_completed_discipline,
-            5 : print_not_attended_disciplines,
-            6 : attending_classes,
-            7 : exit()
+            5 : print_all_completed_disciplines,
+            6 : print_not_attended_disciplines,
+            7 : attending_classes,
+            8 : exit()
         ]).
 
 /*Main function to start the program*/
 main:-
     setup_discipline;
     setup_class;
+    setup_completed_discipline;
     interface.
