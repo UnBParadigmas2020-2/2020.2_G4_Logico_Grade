@@ -14,6 +14,11 @@ print_disciplines_by_semester :-
     get_disciplines_by_semester(Semester),
     interface.
 
+/*Print all completed disciplines of a given semester*/
+print_all_completed_disciplines :-
+    get_completed_disciplines,
+    interface.
+
 
 /*Print discipline by code*/
 print_discipline_by_code :-
@@ -94,19 +99,21 @@ interface:-
     write_ln('[1] - Listar fluxo por número do semestre'),
     write_ln('[2] - Buscar disciplina por codigo'),
     write_ln('[3] - Buscar turmas da disciplina'),
-    write_ln('[4] - Cadastrar matéria já feita'),
-    write_ln('[5] - Ver matérias não feitas'),
-    write_ln('[6] - Gerar Grade'),
-    write_ln('[7] - Encerrar'),
+    write_ln('[4] - Cadastrar matéria já cursada'),
+    write_ln('[5] - Ver matérias cursadas'),
+    write_ln('[6] - Ver matérias não cursadas'),
+    write_ln('[7] - Gerar Grade'),
+    write_ln('[8] - Encerrar'),
     read(Option),
     switch(Option, [
             1 : print_disciplines_by_semester,
             2 : print_discipline_by_code,
             3 : print_classes_by_code,
             4 : register_completed_discipline,
-            5 : print_not_attended_disciplines,
-            6 : attending_classes,
-            7 : exit()
+            5 : print_all_completed_disciplines,
+            6 : print_not_attended_disciplines,
+            7 : attending_classes,
+            8 : exit()
         ]).
 
 /*Main function to start the program*/
