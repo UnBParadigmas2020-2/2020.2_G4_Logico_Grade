@@ -14,11 +14,6 @@ print_disciplines_by_semester :-
     get_disciplines_by_semester(Semester),
     interface.
 
-/*Print all completed disciplines of a given semester*/
-print_all_completed_disciplines :-
-    get_completed_disciplines,
-    interface.
-
 
 /*Print discipline by code*/
 print_discipline_by_code :-
@@ -65,7 +60,16 @@ register_completed_discipline :-
 
 
 print_not_attended_disciplines :-
-    write('Em desenvolviemnto'),
+    findall([Code, Name, Hours, Status, Semester], 
+            discipline(Code, Name, Hours, Status, Semester), Disciplines),
+    
+    findall([Code, Name, Hours, Status, Semester], 
+            completed_discipline(Code, Name, Hours, Status, Semester), Completed),
+    
+    subtract(Disciplines, Completed, Remaining),
+    
+    print_list_of_lists(Remaining),
+    
     interface.
 
 
@@ -100,7 +104,7 @@ interface:-
             2 : print_discipline_by_code,
             3 : print_classes_by_code,
             4 : register_completed_discipline,
-            5 : print_all_completed_disciplines,
+            5 : print_not_attended_disciplines,
             6 : attending_classes,
             7 : exit()
         ]).
