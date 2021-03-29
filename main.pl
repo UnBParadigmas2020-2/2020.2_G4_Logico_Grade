@@ -2,6 +2,7 @@
 :- ['src/classes'].
 :- ['src/disciplines'].
 :- ['src/attending_class'].
+:- ['src/completed_disciplines'].
 
 /*Print all disciplines of a given semester*/
 print_disciplines_by_semester :-
@@ -101,4 +102,5 @@ interface:-
 main:-
     setup_discipline;
     setup_class;
+    setup_completed_disciplines;
     interface.
