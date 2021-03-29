@@ -31,6 +31,13 @@ Adicione 2 ou mais screenshots do projeto em termos de interface e/ou funcioname
 Se você tiver [docker](https://docs.docker.com/get-docker/) e [docker-compose](https://docs.docker.com/compose/install/) instalados, basta rodar o comando a seguir na raiz do projeto e pronto:
 
 ```docker-compose run logico-grade```
+ou 
+```make run```
+  
+Para parar o container em andamento:
+```docker-compose down```
+ou 
+```make down```
 
 ### Manualmente
 Para instalar manualmente, você precisará do [swipl](https://www.swi-prolog.org/download/stable). Com ele instalado, basta executar  
