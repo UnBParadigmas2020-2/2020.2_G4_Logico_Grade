@@ -2,6 +2,7 @@
 :- ['src/classes'].
 :- ['src/disciplines'].
 :- ['src/attending_class'].
+:- ['src/completed_discipline'].
 
 /*Print all disciplines of a given semester*/
 print_disciplines_by_semester :-
@@ -12,6 +13,12 @@ print_disciplines_by_semester :-
     write('Disciplinas do semestre '), write(Semester), write_ln(": "),
     get_disciplines_by_semester(Semester),
     interface.
+
+/*Print all completed disciplines of a given semester*/
+print_all_completed_disciplines :-
+    get_completed_disciplines,
+    interface.
+
 
 /*Print discipline by code*/
 print_discipline_by_code :-
@@ -53,6 +60,7 @@ register_completed_discipline :-
     write(Out, Semester), write(Out, '\''),
     write(Out, '.'), write(Out, '\n'),
     close(Out),
+    write_completed_discipline([Code, Name, Hours, Status, Semester]),
     interface.
 
 
