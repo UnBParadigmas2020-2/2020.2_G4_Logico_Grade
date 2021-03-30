@@ -6,6 +6,8 @@ Paradigma: Lógico
 
 ## Alunos
 
+Disponível em PDF [aqui](Grupo04.pdf).
+
 | Matrícula | Aluno                              |
 | --------- | ---------------------------------- |
 | 170033066 | Esio Gustavo Pereira Freitas       |
@@ -16,11 +18,11 @@ Paradigma: Lógico
 
 ## Sobre
 
-O propgrama é um sistema de recomendações de matérias. Ele permite que o usuário informe uma matéria que deseja cursar. Nisso o sistema vai averiguar de acordo com a materia tempo e requisitos se o usuário pode opu não cursar a respectiva matéria. Caso ele não possa, o sistema recomendará uma lista de matérias que o usuário possa se matricular.
+O programa é um sistema de recomendações de matérias. Ele permite que o usuário informe uma matéria que deseja cursar. Nisso o sistema vai averiguar de acordo com a materia tempo e requisitos se o usuário pode opu não cursar a respectiva matéria. Caso ele não possa, o sistema recomendará uma lista de matérias que o usuário possa se matricular.
 
 ## Screenshots
 
-Adicione 2 ou mais screenshots do projeto em termos de interface e/ou funcionamento.
+![](print.jpg)
 
 ## Instalação
 
@@ -55,11 +57,41 @@ Menu de opções:
 
 ## Vídeo
 
-Adicione 1 ou mais vídeos com a execução do projeto.
+Vídeo disponível [aqui](https://youtu.be/8ghh6wGt0mQ).
 
 ## Outros
 
-Quaisquer outras informações sobre seu projeto podem ser descritas a seguir.
+Para abastecer nossa base de dados, copiamos o conteúdo do SIGAA em arquivos .txt e utilizamos algumas expressões regulares para transformar o texto para um formato que seria de mais fácil uso. Seguem alguns exemplos:
+
+De:
+```
+([0-9A-Z]+)\s2020.2\s([A-Z\s]+)\s\(([0-9]+h)\)\s([0-9A-Z\s]+)\s\n+([0-9]+)\s([0-9]+)\s(a designar|FGA)
+
+A	2020.2	LUIS FERNANDO BALDUINO DE SOUSA (30h)	24T23 
+
+45	43	a designar
+```
+
+Para:
+```
+';$1;$2;$3;$4'.
+
+';A;LUIS FERNANDO BALDUINO DE SOUSA;30h;24T23'.
+```
+
+De:
+```
+([A-Z]{3}[0-9]{4}) - ([a-záàâãéèêíïóôõöúçñ 0-9,-]+)- ([0-9]+h)\s([a-záàâãéèêíïóôõöúçñ]+)
+
+FGA0161 - ENGENHARIA E AMBIENTE - 60h	Obrigatória	
+```
+
+Para:
+```
+'$1;$2;$3;$4'.
+
+'FGA0161;ENGENHARIA E AMBIENTE;60h;Obrigatória'.
+```
 
 ## Fontes
 
